@@ -64,33 +64,40 @@ public class JavaATMMachine  {
     }
 
     public static int menu() {
-        System.out.println("Choose one of the following: \n1.Display Balance\n2.Deposit\n3.Withdraw\n4.Log Out");
+        System.out.println("Welcome PATIENCE EKEMINI STEPHEN\n Choose one of the following: " +
+                "\n1.Deposit\n2.Withdraw\n3.Balance\n4.Transfer\n5.Log Out");
         choose = keyboard.nextInt();
 
-        if (choose == 1) {// 1. Display Balance
-            displayBalance();
+        if (choose == 1) {// 1. Deposit
+            deposit();
             menu();
             return 1;
 
         }
-        if (choose == 2) {// 2. Deposit
-            deposit();
+        if (choose == 2) {// 2. Withdraw
+            withdraw();
             menu();
             return 2;
 
         }
-        if (choose == 3) {// 3. Withdraw
-            withdraw();
+        if (choose == 3) {// 3. Balance
+            displayBalance();
             menu();
             return 3;
 
         }
-        if (choose == 4) {// 4. Log out
+
+        if(choose == 4) {// 4. Transfer
+            transfer();
+            menu();
+            return 4;
+        }
+        if (choose == 5) {// 5. Log out
             System.out.println("You are logged out.");
             return 4;
 
         }
-        if (choose <= 5) {// type in anything greater than 4 and you will get a
+        if (choose <= 6) {// type in anything greater than 4 and you will get a
             // system error
             System.out.println("System Error");
             menu();
@@ -104,6 +111,22 @@ public class JavaATMMachine  {
         }
         return choose;
 
+    }
+
+    private static void transfer() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter Receiver Account Number");
+        String tranAccount = input.nextLine();
+        System.out.println("Receiver Account Number:" + tranAccount);
+        double tranAmount = input.nextDouble();
+        System.out.println("Your Transfer Amount:" + tranAmount);
+        if(currentBalance < tranAmount){
+            System.out.println("Your balance is not sufficient ");
+        }else {
+            currentBalance = -tranAmount;
+            System.out.println("Your new balance is: " + currentBalance);
+            System.out.println("Transfer Successful");
+        }
     }
 
     public static void deposit()
